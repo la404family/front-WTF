@@ -1,0 +1,688 @@
+/* Variables CSS racines */
+:root {
+  /* Couleurs principales */
+  --primary-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+  --body-bg: linear-gradient(135deg, #0a1f3d 0%, #1e3c72 40%, #2a5298 100%);
+
+  /* Style unifié pour tous les boutons (sauf WTF et avatar) */
+  --btn-uniform-bg: linear-gradient(135deg, #d3d017 0%, #ecc410 50%, #fae422 100%);
+  --btn-uniform-hover-bg: linear-gradient(135deg, #ffd700 0%, #ffb347 50%, #ffd700 100%);
+  --btn-uniform-hover-shadow: 0 8px 25px rgba(16, 185, 129, 0.4),
+    0 0 30px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --btn-uniform-hover-filter: brightness(0) invert(1)
+    drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+  --btn-uniform-hover-transform: rotate(10deg) scale(1.1);
+
+  /* Couleurs des boutons - Thème jaune pour WTF */
+  --btn-bg: linear-gradient(135deg, #ffd700 0%, #ffb347 50%, #ffd700 100%);
+  --btn-hover-glow: rgba(255, 215, 0, 0.4);
+  --btn-border-hover: #ffffff;
+
+  /* Shadows et effets */
+  --shadow-main: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 40px rgba(42, 82, 152, 0.3);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --btn-shadow: 0 4px 15px var(--btn-hover-glow);
+  --btn-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--btn-hover-glow);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.1s ease;
+
+  /* Tailles */
+  --btn-size: 65px;
+  --btn-icon-size: 30px;
+  --avatar-size: 150px;
+  --avatar-icon-size: 70px;
+  --border-radius: 15px;
+}
+
+/* Import de la font personnalisée */
+@font-face {
+  font-family: "ArialCustom";
+  src: url("fonts/arial.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "ArialCustom", Arial, sans-serif;
+  background: var(--body-bg);
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Animations globales */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Header sticky */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--primary-bg);
+  padding: 30px 30px 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-main), var(--shadow-glow), var(--shadow-inset);
+  backdrop-filter: blur(10px);
+  animation: slideInLeft 0.8s ease-out;
+  min-height: 100px;
+}
+
+/* Section gauche du header */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+/* Container pour l'avatar avec bordure gauche */
+.avatar-container {
+  display: flex;
+  align-items: center;
+  padding-left: 170px;
+  position: relative;
+}
+
+/* Style de l'avatar */
+.avatar {
+  width: 150px;
+  height: 150px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+  position: absolute;
+  top: -25px;
+  left: -5px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.avatar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.avatar:hover::before {
+  left: 100%;
+}
+
+.avatar:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: #ffd700;
+}
+
+.avatar:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.avatar::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #00ff88, #0a7c45);
+  border-radius: 50%;
+}
+
+.avatar img {
+  width: 70px;
+  height: 70px;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Informations du joueur */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.player-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-clip: text;
+  position: relative;
+  left: -15px;
+}
+
+.player-points {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.player-points::before {
+  content: "★";
+  color: #ffd700;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Section droite du header */
+.header-right {
+  display: flex;
+  gap: 15px;
+  animation: slideInRight 0.8s ease-out 0.4s both;
+}
+
+/* Boutons du header */
+.header-btn {
+  width: 65px;
+  height: 65px;
+  border: none;
+  border-radius: 15px;
+  background: var(--btn-uniform-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-btn:hover {
+  background: var(--btn-uniform-hover-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--btn-uniform-hover-shadow);
+  border-color: #ffd700;
+}
+
+.header-btn:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.header-btn img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.header-btn:hover img {
+  filter: var(--btn-uniform-hover-filter);
+  transform: var(--btn-uniform-hover-transform);
+}
+
+/* Badge de notification - bouton parent */
+.notifications-btn {
+  position: relative;
+  overflow: visible !important;
+}
+
+/* Badge de notification - élément HTML */
+.notification-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 15px rgba(229, 62, 62, 0.8), 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+/* Effets de particules optionnels */
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(30, 60, 114, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsivité améliorée */
+@media (max-width: 768px) {
+  .header {
+    padding: 25px 18px 15px 18px;
+    min-height: 85px;
+  }
+
+  .header-left {
+    gap: 15px;
+  }
+
+  .avatar-container {
+    padding-left: 140px;
+  }
+
+  .avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    top: -20px;
+    left: -3px;
+  }
+
+  .avatar img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .player-name {
+    font-size: 20px;
+  }
+
+  .player-points {
+    font-size: 16px;
+  }
+
+  .header-btn {
+    width: 55px;
+    height: 55px;
+  }
+
+  .header-btn img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+  .notification-badge {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    top: -12px;
+    right: -12px;
+  }
+
+  @media (max-width: 480px) {
+    .header {
+      padding: 20px 15px 12px 15px;
+      min-height: 75px;
+    }
+
+    .header-left {
+      gap: 10px;
+    }
+
+    .header-right {
+      gap: 8px;
+    }
+
+    .avatar-container {
+      padding-left: 110px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      top: -15px;
+      left: -2px;
+    }
+
+    .avatar img {
+      width: 45px;
+      height: 45px;
+    }
+
+    .player-name {
+      font-size: 16px;
+    }
+
+    .player-points {
+      font-size: 14px;
+    }
+
+    .header-btn {
+      width: 48px;
+      height: 48px;
+    }
+
+    .header-btn img {
+      width: 22px;
+      height: 22px;
+    }
+
+    .notification-badge {
+      width: 22px;
+      height: 22px;
+      font-size: 10px;
+      top: -10px;
+      right: -10px;
+    }
+  }
+}
+/* Animation au scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .header {
+    transition: all 0.3s ease;
+  }
+
+  .header.scrolled {
+    background: linear-gradient(
+      135deg,
+      rgba(30, 60, 114, 0.95) 0%,
+      rgba(42, 82, 152, 0.95) 50%,
+      rgba(30, 60, 114, 0.95) 100%
+    );
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 60px rgba(42, 82, 152, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ========== FOOTER ========== */
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+  padding: 15px 20px 20px 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(42, 82, 152, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+
+  backdrop-filter: blur(10px);
+}
+
+/* Navigation du footer */
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Boutons du footer - même style que header */
+.footer-btn {
+  width: 65px;
+  height: 65px;
+  border: none;
+  border-radius: 15px;
+  background: var(--btn-uniform-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.footer-btn:hover::before {
+  left: 100%;
+}
+
+.footer-btn:hover {
+  background: var(--btn-uniform-hover-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--btn-uniform-hover-shadow);
+  border-color: #ffd700;
+}
+
+.footer-btn:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.footer-btn img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.footer-btn:hover img {
+  filter: var(--btn-uniform-hover-filter);
+  transform: var(--btn-uniform-hover-transform);
+}
+
+/* Bouton WTF spécial (plus gros et surélevé) */
+.wtf-btn {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff6b35 50%, #ffd700 100%);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1e3c72;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+.wtf-btn img {
+  width: 55px;
+  height: 55px;
+  filter: brightness(0) invert(1);
+}
+
+.wtf-btn:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: #ffffff;
+}
+
+/* Effets de particules pour le footer */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(30, 60, 114, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 12px 15px 18px 15px;
+  }
+
+  .footer-nav {
+    gap: 15px;
+    max-width: 450px;
+  }
+
+  .footer-btn {
+    width: 55px;
+    height: 55px;
+  }
+
+  .footer-btn img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .notification-badge {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    top: -12px;
+    right: -12px;
+  }
+
+  .wtf-btn {
+    width: 75px;
+    height: 75px;
+    font-size: 14px;
+    margin: 0 8px;
+    transform: translateY(-4px);
+  }
+
+  .wtf-btn img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .wtf-btn:hover {
+    transform: translateY(-6px) scale(1.06);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 10px 12px 15px 12px;
+  }
+
+  .footer-nav {
+    gap: 12px;
+    max-width: 380px;
+  }
+
+  .footer-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .footer-btn img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .notification-badge {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+    top: -10px;
+    right: -10px;
+  }
+
+  .wtf-btn {
+    width: 65px;
+    height: 65px;
+    font-size: 12px;
+    margin: 0 6px;
+    transform: translateY(-3px);
+  }
+
+  .wtf-btn img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .wtf-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
