@@ -5,13 +5,21 @@
   --body-bg: linear-gradient(135deg, #0a1f3d 0%, #1e3c72 40%, #2a5298 100%);
 
   /* Style unifié pour tous les boutons (sauf WTF et avatar) */
-  --btn-uniform-bg: linear-gradient(135deg, #d3d017 0%, #ecc410 50%, #fae422 100%);
+  --btn-uniform-bg: linear-gradient(135deg, #bcb91e 0%, #ecc410 50%, #f3eb10 100%);
   --btn-uniform-hover-bg: linear-gradient(135deg, #ffd700 0%, #ffb347 50%, #ffd700 100%);
   --btn-uniform-hover-shadow: 0 8px 25px rgba(16, 185, 129, 0.4),
     0 0 30px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   --btn-uniform-hover-filter: brightness(0) invert(1)
     drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
   --btn-uniform-hover-transform: rotate(10deg) scale(1.1);
+
+  /* Style pour les boutons d'onglets - Thème vert */
+  --btn-tab-bg: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  --btn-tab-hover-bg: linear-gradient(135deg, #10b981 0%, #34d399 50%, #10b981 100%);
+  --btn-tab-hover-shadow: 0 8px 25px rgba(16, 185, 129, 0.4), 0 0 30px rgba(16, 185, 129, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --btn-tab-hover-filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+  --btn-tab-hover-transform: rotate(5deg) scale(1.05);
 
   /* Couleurs des boutons - Thème jaune pour WTF */
   --btn-bg: linear-gradient(135deg, #ffd700 0%, #ffb347 50%, #ffd700 100%);
@@ -243,23 +251,28 @@ body {
   animation: slideInRight 0.8s ease-out 0.4s both;
 }
 
-/* Boutons du header */
-.header-btn {
+/* Classe de base pour tous les boutons */
+.btn {
   width: 65px;
   height: 65px;
   border: none;
   border-radius: 15px;
-  background: var(--btn-uniform-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-size: 0;
+}
+
+/* Boutons du header */
+.header-btn {
+  background: var(--btn-uniform-bg);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
 }
 
 .header-btn:hover {
@@ -552,8 +565,8 @@ body {
 
 /* Bouton WTF spécial (plus gros et surélevé) */
 .wtf-btn {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   background: linear-gradient(135deg, #ffd700 0%, #ff6b35 50%, #ffd700 100%);
   box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -567,8 +580,8 @@ body {
 }
 
 .wtf-btn img {
-  width: 55px;
-  height: 55px;
+  width: 90%;
+  height: 90%;
   filter: brightness(0) invert(1);
 }
 
@@ -632,8 +645,8 @@ body {
   }
 
   .wtf-btn img {
-    width: 38px;
-    height: 38px;
+    width: 90%;
+    height: 90%;
   }
 
   .wtf-btn:hover {
@@ -684,5 +697,122 @@ body {
 
   .wtf-btn:hover {
     transform: translateY(-5px) scale(1.05);
+  }
+}
+
+/* ========== CONTENU PRINCIPAL ========== */
+
+/* Container principal */
+.main-content {
+  padding-top: 30px;
+  padding-bottom: 120px; /* Espace pour le footer fixe */
+  min-height: calc(100vh - 100px); /* Ajuster selon la hauteur du header */
+}
+
+/* Container des onglets */
+.main-action-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 20px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Styles des boutons d'onglets */
+.tab-btn {
+  width: 120px;
+  height: 65px;
+  border: none;
+  border-radius: 15px;
+  background: var(--btn-tab-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  font-family: "ArialCustom", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.tab-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.tab-btn:hover::before {
+  left: 100%;
+}
+
+.tab-btn:hover {
+  background: var(--btn-tab-hover-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--btn-tab-hover-shadow);
+  border-color: #10b981;
+}
+
+.tab-btn:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+/* État actif pour les onglets */
+.tab-btn.active {
+  background: var(--btn-tab-hover-bg);
+  box-shadow: var(--btn-tab-hover-shadow);
+  border-color: #34d399;
+  transform: translateY(-2px);
+}
+
+/* Responsive pour le contenu principal et les onglets */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+
+  .main-action-tabs {
+    gap: 15px;
+    padding: 25px 15px;
+  }
+
+  .tab-btn {
+    width: 100px;
+    height: 55px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 25px;
+    padding-bottom: 90px;
+  }
+
+  .main-action-tabs {
+    gap: 10px;
+    padding: 20px 10px;
+  }
+
+  .tab-btn {
+    width: 85px;
+    height: 48px;
+    font-size: 17px;
   }
 }
