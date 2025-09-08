@@ -267,12 +267,23 @@ body {
   font-size: 0;
 }
 
-/* Boutons du header */
+/* Boutons du header - même style que footer SANS le ::before */
 .header-btn {
+  width: 65px;
+  height: 65px;
+  border: none;
+  border-radius: 15px;
   background: var(--btn-uniform-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
 .header-btn:hover {
@@ -523,21 +534,6 @@ body {
   overflow: hidden;
 }
 
-.footer-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.footer-btn:hover::before {
-  left: 100%;
-}
-
 .footer-btn:hover {
   background: var(--btn-uniform-hover-bg);
   transform: translateY(-3px) scale(1.05);
@@ -702,21 +698,27 @@ body {
 
 /* ========== CONTENU PRINCIPAL ========== */
 
-/* Container principal */
+/* Container principal - Position sticky */
 .main-content {
-  padding-top: 30px;
-  padding-bottom: 120px; /* Espace pour le footer fixe */
-  min-height: calc(100vh - 100px); /* Ajuster selon la hauteur du header */
+  position: sticky;
+  top: 100px;
+  z-index: 998;
+  padding-top: 0;
+  padding-bottom: 120px;
+  min-height: calc(100vh - 100px);
 }
 
-/* Container des onglets */
+/* Container des onglets - Position sticky dans main-content */
 .main-action-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding: 30px 20px;
-  margin: 0 auto;
+  padding: 20px;
+  margin: 0 auto 30px auto;
   max-width: 600px;
 }
 
@@ -780,6 +782,185 @@ body {
   transform: translateY(-2px);
 }
 
+/* ========== CONTENU DYNAMIQUE - CARD UNIQUE ========== */
+
+.tab-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.user-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card utilisateur dynamique - Nouvelle disposition */
+.friend-card.user-card.row-card {
+  background: var(--primary-bg);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow-main);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.friend-card.user-card.row-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+  transition: left 0.8s ease;
+}
+
+.friend-card.user-card.row-card:hover::before {
+  left: 100%;
+}
+
+.friend-card.user-card.row-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+/* Badge de rang */
+.rank-badge {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 50%, #ffd700 100%);
+  color: #1a1a1a;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 8px 15px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  min-width: 50px;
+  text-align: center;
+  font-family: "ArialCustom", Arial, sans-serif;
+}
+
+/* Top row - Rang + Nom à gauche, Plan + Status à droite */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-top .left-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-top .right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.card-top .username {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  font-family: "ArialCustom", Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.card-top .status-text {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  font-family: "ArialCustom", Arial, sans-serif;
+}
+
+.card-top .plan-badge {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(34, 197, 94, 0.3);
+  font-family: "ArialCustom", Arial, sans-serif;
+}
+
+/* Center - Espace vide */
+.card-center {
+  flex: 1;
+  margin: 15px 0;
+}
+
+.friend-card:hover .card-bottom .card-avatar {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+}
+
+/* Bottom row - Avatar à gauche, Points à droite */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.card-bottom .card-avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.card-bottom .card-avatar {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.3);
+  transition: var(--transition-smooth);
+  margin: 0;
+  position: relative;
+}
+
+.card-bottom .card-avatar img {
+  width: 60px;
+  height: 60px;
+  filter: brightness(0) invert(1);
+}
+
+.meta.points {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1em;
+  font-family: "ArialCustom", Arial, sans-serif;
+  align-self: flex-end;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meta.points::before {
+  content: "★";
+  color: #ffd700;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+
 /* Responsive pour le contenu principal et les onglets */
 @media (max-width: 768px) {
   .main-content {
@@ -796,6 +977,45 @@ body {
     width: 100px;
     height: 55px;
     font-size: 17px;
+  }
+
+  /* Responsive card - Tablettes */
+  .tab-content-container {
+    padding: 0 15px;
+  }
+
+  .friend-card.user-card.row-card {
+    padding: 20px;
+    min-height: 170px;
+  }
+
+  .card-bottom .card-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+  }
+
+  .card-bottom .card-avatar img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-top .username {
+    font-size: 1.1em;
+  }
+
+  .rank-badge {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  .card-top .left-section {
+    gap: 10px;
+  }
+
+  .card-top .plan-badge {
+    font-size: 0.8em;
+    padding: 5px 10px;
   }
 }
 
@@ -814,5 +1034,54 @@ body {
     width: 85px;
     height: 48px;
     font-size: 17px;
+  }
+
+  /* Responsive card - Mobiles */
+  .tab-content-container {
+    padding: 0 10px;
+  }
+
+  .friend-card.user-card.row-card {
+    padding: 15px;
+    min-height: 130px;
+  }
+
+  .card-bottom .card-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    border: none;
+  }
+
+  .card-bottom .card-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-top .username {
+    font-size: 1em;
+  }
+
+  .rank-badge {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .card-top .left-section {
+    gap: 8px;
+  }
+
+  .card-top .plan-badge {
+    font-size: 0.7em;
+    padding: 4px 8px;
+  }
+
+  .card-bottom .status-text {
+    font-size: 0.8em;
+  }
+
+  .meta.points {
+    font-size: 0.9em;
+    padding: 5px 10px;
   }
 }

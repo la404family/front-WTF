@@ -148,3 +148,103 @@ function updatePlayerName(newName) {
         nameElement.textContent = newName;
     }
 }
+
+// ========== GESTION DES ONGLETS ========== 
+document.addEventListener('DOMContentLoaded', function () {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const dynamicCard = document.getElementById('dynamicUserCard');
+
+    // Données d'exemple pour chaque onglet (à remplacer par les vraies données du backend plus tard)
+    const tabData = {
+        global: {
+            rank: "#1",
+            username: "Joueur Global",
+            plan: "Elite",
+            status: "en ligne",
+            points: "Pts 492 387",
+            avatar: "icons/app.svg"
+        },
+        moi: {
+            rank: "#1",
+            username: "Mon Profil",
+            plan: "Elite",
+            status: "en ligne",
+            points: "Pts 492 387",
+            avatar: "icons/app.svg"
+        },
+        amis: {
+            rank: "#3",
+            username: "Meilleur Ami",
+            plan: "Pro",
+            status: "hors ligne",
+            points: "Pts 387 291",
+            avatar: "icons/app.svg"
+        }
+    };
+
+    // Fonction pour mettre à jour la card dynamique
+    function updateDynamicCard(tabName) {
+        const data = tabData[tabName];
+        if (data && dynamicCard) {
+            // Mise à jour des données de la card
+            dynamicCard.setAttribute('data-user-rank', data.rank.replace('#', ''));
+
+            const rankBadge = dynamicCard.querySelector('.rank-badge');
+            const username = dynamicCard.querySelector('.username');
+            const planBadge = dynamicCard.querySelector('.plan-badge');
+            const statusText = dynamicCard.querySelector('.status-text');
+            const points = dynamicCard.querySelector('.meta.points');
+            const avatar = dynamicCard.querySelector('.card-avatar img');
+
+            if (rankBadge) rankBadge.textContent = data.rank;
+            if (username) username.textContent = data.username;
+            if (planBadge) planBadge.textContent = data.plan;
+            if (statusText) statusText.textContent = data.status;
+            if (points) points.textContent = data.points;
+            if (avatar) avatar.src = data.avatar;
+
+            // Animation de mise à jour
+            dynamicCard.style.opacity = '0.7';
+            dynamicCard.style.transform = 'translateY(-10px)';
+
+            setTimeout(() => {
+                dynamicCard.style.opacity = '1';
+                dynamicCard.style.transform = 'translateY(0)';
+            }, 200);
+        }
+    }
+
+    // Gestion des clics sur les onglets
+    tabButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Retirer la classe active de tous les boutons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Ajouter la classe active au bouton cliqué
+            button.classList.add('active');
+
+            // Récupérer le nom de l'onglet
+            const tabName = button.getAttribute('data-tab');
+
+            // Mettre à jour la card dynamique
+            updateDynamicCard(tabName);
+
+            // Animation de feedback du bouton
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 100);
+
+            console.log(`Onglet ${tabName} activé`);
+        });
+    });
+
+    // Initialiser avec l'onglet actif au chargement de la page
+    const activeTab = document.querySelector('.tab-btn.active');
+    if (activeTab) {
+        const initialTab = activeTab.getAttribute('data-tab') || 'global';
+        updateDynamicCard(initialTab);
+    }
+});
