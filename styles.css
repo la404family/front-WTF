@@ -798,7 +798,7 @@ body {
 
 /* Card utilisateur dynamique - Nouvelle disposition */
 .friend-card.user-card.row-card {
-  background: var(--primary-bg);
+  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
   border-radius: var(--border-radius);
   padding: 25px;
   box-shadow: var(--shadow-main);
@@ -1083,5 +1083,97 @@ body {
   .meta.points {
     font-size: 0.9em;
     padding: 5px 10px;
+  }
+}
+
+/* ========== PAGE AVATAR SIMPLE ========== */
+.simple-page-container {
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--body-bg);
+}
+
+.back-button-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-btn {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 15px;
+  background: var(--btn-uniform-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+}
+
+.back-btn:hover {
+  background: var(--btn-uniform-hover-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--btn-uniform-hover-shadow);
+  border-color: #ffd700;
+}
+
+.back-btn img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover img {
+  filter: var(--btn-uniform-hover-filter);
+  transform: var(--btn-uniform-hover-transform);
+}
+
+.page-content {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+/* Responsive pour page simple */
+@media (max-width: 768px) {
+  .back-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .back-btn img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-page-container {
+    padding: 15px;
+  }
+
+  .back-button-container {
+    top: 15px;
+    left: 15px;
+  }
+
+  .back-btn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .back-btn img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .page-content {
+    margin-top: 80px;
+    padding: 15px;
   }
 }

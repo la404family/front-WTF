@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar - Du Chevreuil</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="simple-page-container">
+      <div class="back-button-container">
+        <button class="back-btn" onclick="goHome()">
+          <img src="icons/arrow-left.svg" alt="Retour" />
+        </button>
+      </div>
+
+      <div class="page-content">
+        <!-- Page avatar vide -->
+      </div>
+    </div>
+
+    <script src="pageTransitions.js"></script>
+    <script>
+      function goHome() {
+        PageTransitions.goToPage("index.html");
+      }
+    </script>
+  </body>
+</html>

@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const statsBtn = document.querySelector('.stats-btn');
     const notificationsBtn = document.querySelector('.notifications-btn');
 
+    // Chargement de l'avatar sauvegardé depuis localStorage
+    const savedAvatar = localStorage.getItem('selectedAvatar');
+    const headerAvatar = document.querySelector('.avatar img');
+    if (savedAvatar && headerAvatar) {
+        headerAvatar.src = savedAvatar;
+    }
+
     // Effet de scroll sur le header
     let lastScrollTop = 0;
     window.addEventListener('scroll', function () {
