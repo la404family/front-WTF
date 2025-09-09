@@ -1,0 +1,140 @@
+{
+  "avatarCustomization": {
+    "baseModels": {
+      "male": {
+        "name": "Robot Expressif",
+        "url": "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
+        "fallback": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/RiggedSimple/glTF/RiggedSimple.gltf",
+        "scale": [1, 1, 1],
+        "position": [0, -1, 0],
+        "rotation": [0, 0, 0],
+        "type": "robot"
+      },
+      "female": {
+        "name": "Soldat",
+        "url": "https://threejs.org/examples/models/gltf/Soldier.glb",
+        "fallback": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/RiggedFigure/glTF/RiggedFigure.gltf",
+        "scale": [1, 1, 1],
+        "position": [0, -1, 0],
+        "rotation": [0, 0, 0],
+        "type": "human"
+      },
+      "robot": {
+        "name": "Robot Danseur",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/RiggedSimple/glTF-Binary/RiggedSimple.glb",
+        "fallback": "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
+        "scale": [0.8, 0.8, 0.8],
+        "position": [0, -0.8, 0],
+        "rotation": [0, 0, 0],
+        "type": "robot"
+      },
+      "humanoid": {
+        "name": "Humanoïde",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/RiggedFigure/glTF-Binary/RiggedFigure.glb",
+        "fallback": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SimpleMorph/glTF/SimpleMorph.gltf",
+        "scale": [1.2, 1.2, 1.2],
+        "position": [0, -1.2, 0],
+        "rotation": [0, 0, 0],
+        "type": "humanoid"
+      }
+    },
+    "skinColors": {
+      "light": "#FFDBAC",
+      "medium": "#F1C27D",
+      "tan": "#E0AC69",
+      "dark": "#C68642",
+      "olive": "#8FBC8F",
+      "pale": "#FFF8DC",
+      "fantasy_blue": "#87CEEB",
+      "fantasy_green": "#98FB98",
+      "fantasy_purple": "#DDA0DD"
+    },
+    "hairColors": {
+      "brown": "#8B4513",
+      "black": "#2F2F2F",
+      "blonde": "#FFD700",
+      "red": "#B22222",
+      "auburn": "#A0522D",
+      "gray": "#808080",
+      "white": "#F5F5F5",
+      "fantasy_pink": "#FF69B4",
+      "fantasy_blue": "#00BFFF",
+      "fantasy_green": "#32CD32"
+    },
+    "eyeColors": {
+      "brown": "#8B4513",
+      "blue": "#4169E1",
+      "green": "#228B22",
+      "hazel": "#CD853F",
+      "gray": "#696969",
+      "amber": "#FFBF00",
+      "violet": "#8A2BE2"
+    },
+    "outfits": {
+      "male": {
+        "casual": {
+          "name": "Décontracté",
+          "shirt": "#4A90E2",
+          "pants": "#2C3E50",
+          "shoes": "#8B4513"
+        },
+        "formal": {
+          "name": "Formel",
+          "shirt": "#FFFFFF",
+          "pants": "#2C3E50",
+          "shoes": "#000000"
+        },
+        "sporty": {
+          "name": "Sportif",
+          "shirt": "#E74C3C",
+          "pants": "#34495E",
+          "shoes": "#FFFFFF"
+        },
+        "fantasy": {
+          "name": "Fantasy",
+          "shirt": "#9B59B6",
+          "pants": "#8E44AD",
+          "shoes": "#2C3E50"
+        }
+      },
+      "female": {
+        "casual": {
+          "name": "Décontracté",
+          "top": "#E91E63",
+          "bottom": "#3F51B5",
+          "shoes": "#795548"
+        },
+        "elegant": {
+          "name": "Élégant",
+          "top": "#000000",
+          "bottom": "#000000",
+          "shoes": "#E53935"
+        },
+        "sporty": {
+          "name": "Sportif",
+          "top": "#4CAF50",
+          "bottom": "#607D8B",
+          "shoes": "#FFFFFF"
+        },
+        "fantasy": {
+          "name": "Fantasy",
+          "top": "#FF5722",
+          "bottom": "#795548",
+          "shoes": "#9C27B0"
+        }
+      }
+    },
+    "accessories": {
+      "hats": ["none", "cap", "beanie", "fedora", "crown"],
+      "glasses": ["none", "regular", "sunglasses", "fantasy"],
+      "jewelry": ["none", "necklace", "earrings", "both"]
+    },
+    "poses": {
+      "idle": "Position debout",
+      "confident": "Confiant",
+      "casual": "Décontracté",
+      "greeting": "Salutation",
+      "thinking": "Réflexion"
+    }
+  }
+}
