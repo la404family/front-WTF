@@ -92,41 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Effet de particules flottantes (optionnel)
-    function createFloatingParticle() {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #ffd700, transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.7;
-        `;
 
-        const startX = Math.random() * window.innerWidth;
-        const duration = 3000 + Math.random() * 2000;
-
-        particle.style.left = startX + 'px';
-        particle.style.top = '100vh';
-
-        document.body.appendChild(particle);
-
-        // Animation de montée
-        particle.animate([
-            { transform: 'translateY(0px) scale(0)', opacity: 0 },
-            { transform: 'translateY(-20px) scale(1)', opacity: 0.7, offset: 0.1 },
-            { transform: `translateY(-${window.innerHeight + 50}px) scale(0)`, opacity: 0 }
-        ], {
-            duration: duration,
-            easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-    }
-
-    // Créer des particules de temps en temps
-    setInterval(createFloatingParticle, 2000);
 });
 
 // Fonction utilitaire pour mettre à jour les points du joueur
